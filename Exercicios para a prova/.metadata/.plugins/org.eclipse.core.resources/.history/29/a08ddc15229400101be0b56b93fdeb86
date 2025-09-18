@@ -1,0 +1,25 @@
+package Exercicios_POO;
+import java.util.Scanner;
+import Exercicios_POO.Biblioteca;
+public class Main_biblioteca {
+    public static void main(String[] args) {
+    	Scanner scan = new Scanner(System.in);
+        String[] livros = {"Dom Quixote", "Dom Peperonni", "Senhor dos Anéis"};
+        int[] diasAtrasados = {2, 2, 5};
+        double[] multa = {10.5, 7.0, 0.8};
+        String[] livrosDisponiveis = {"Dom Quixote", "Dom Peperonni", "Senhor dos Anéis"};
+        
+        Biblioteca biblioteca = new Biblioteca(livros, diasAtrasados, multa, livrosDisponiveis);
+        
+        
+        biblioteca.MostrarLivros();
+        
+        biblioteca.emprestarLivro("1984");
+        
+        double totalMulta = biblioteca.calcMulta();
+        System.out.println("Multa total: R$ " + totalMulta);
+        
+        double mediaDias = biblioteca.diasAtrasados();
+        System.out.println("Média de dias atrasados: " + mediaDias);
+    }
+}

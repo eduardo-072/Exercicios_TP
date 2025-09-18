@@ -1,0 +1,73 @@
+package Exercicios_POO;
+
+public class Loja {
+	private String[] nm_Produtos = {"Iphone 17 Pro Max", "Poco X7 Pro", "Sansung M14", "Sansung A56", "Poco X6 Pro"};
+	private int[] qt_Estoque = {10, 15, 2, 3, 4};
+	private double[] vl_Produtos = {18000.10, 1800, 1400, 1500, 1712};
+	
+	private int qtd = nm_Produtos.length;
+	
+	public int getQtd() {
+	    return this.qtd;
+	}
+	
+	public void setProdutos(int index, String nomes, double preco, int qtd) {
+		this.nm_Produtos[index - 1] = nomes;
+		this.qt_Estoque[index - 1] = qtd;
+		this.vl_Produtos[index - 1] = preco;
+	}
+	
+	public void getProdutos() {
+	    for(int c = 0; c < nm_Produtos.length; c++) {
+	        System.out.println(
+	            "Nome Produto: " + nm_Produtos[c] + "\n" +
+	            "Preço Produto: " + vl_Produtos[c] + "\n" +
+	            "Quantidade Produto: " + qt_Estoque[c] + "\n"
+	        );
+	    }
+	}
+
+	public String produtosDestaque() {
+	    double precoMenor = Double.MAX_VALUE, precoMaior = 0;
+	    for (int c = 0; c < this.qtd; c++) {
+	        if (this.vl_Produtos[c] > precoMaior) {
+	            precoMaior = this.vl_Produtos[c];
+	        }
+	        if (this.vl_Produtos[c] < precoMenor) {
+	            precoMenor = this.vl_Produtos[c];
+	        }
+	    }
+
+	    return "O Produto mais caro da loja é: R$ " + precoMaior + "\n" +
+	           "O Produto mais barato da loja é: R$ " + precoMenor;
+	}
+
+	
+	public double vl_total_Estoque() {
+		double vl_total = 0;
+		for(int c = 0; c < this.qtd; c++) {
+				vl_total += this.vl_Produtos[c] * this.qt_Estoque[c];
+		}
+		
+		return vl_total;
+	}
+	
+	public String comprarProduto(int index, int qtd) {
+		if(this.qt_Estoque[index - 1] >= qtd) {
+			this.qt_Estoque[index - 1] -= qtd;
+			return "Obrigado pela Compra";
+		} else {
+			return "Quantidade Inválida";
+		}
+	}
+	
+	public String devolverProduto(int index, int qtd) {
+		this.qt_Estoque[index - 1] = qtd;
+		return "Obrigado pela devolução";
+	}
+	public static void main(String[] args) {
+		
+		
+	}
+
+}

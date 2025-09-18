@@ -1,0 +1,13 @@
+package Exercicios_POO;
+import Exercicios_POO.Loja;
+public class Main_Loja {
+    
+	public static void main(String[] args) {
+        Loja lojaDSM = new Loja(); 
+
+        lojaDSM.getProdutos();
+        System.out.println(lojaDSM.produtosDestaque());
+        System.out.println("Valor total do estoque: R$ " + lojaDSM.vl_total_Estoque());
+    }
+}
+

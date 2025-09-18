@@ -1,0 +1,37 @@
+package Exercicios_POO;
+import java.util.Scanner;
+public class Main{
+public static void main(String[] args) {
+	Scanner scan = new Scanner(System.in);
+    int matriz[][] = new int[3][3];
+
+    //Inserindo dados na Matriz
+    System.out.println("Digite os valores da Matriz: ");
+    int contador = 1;
+    for(int l = 0; l < 3; l++){
+        for(int c = 0; c < 3; c++){
+            matriz[l][c] = scan.nextInt();
+            contador++;
+        }
+    }
+    
+    //Exibindo os dados 
+    System.out.println("Matriz sendo exibida: ");
+    for (int l = 0; l < 3; l++) {
+        for (int c = 0; c < 3; c++) {
+            System.out.print(matriz[l][c] + " ");
+        }
+        System.out.println();
+    }
+
+    int desconto1 = 1;
+    int desconto2 = -3;
+
+    int calc1 = matriz[0][0] * matriz[1][1] * matriz[2][2];
+    int calc2 = desconto1 * desconto1 * desconto2;
+    int div = calc1 /calc2;
+
+    System.out.println(div);
+
+    }
+}

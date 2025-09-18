@@ -1,0 +1,108 @@
+package Exercicios_POO;
+
+public class Biblioteca {
+    private String[] livros;
+    private int[] diasAtrasados;
+    private double[] multa;
+    private String[] livrosDisponiveis;
+
+    public Biblioteca(String[] livros, int[] diasAtrasados, double[] multa, String[] livrosDisponiveis) {
+        this.livros = livros;
+        this.diasAtrasados = diasAtrasados;
+        this.multa = multa;
+        this.livrosDisponiveis = livrosDisponiveis;
+    }
+    
+    public String MostrarLivros() {
+        System.out.println("Livros cadastrados");
+        for(int i = 0; i < livros.length; i++) {
+             System.out.println("Livro: " + livros[i]);
+             System.out.println("Dias de atraso: " + diasAtrasados[i]);
+             System.out.println("Multa por dia: R$" + multa[i]);
+             System.out.println();
+        }
+        return "";
+    }
+    
+    public double calcMulta() {
+        double total = 0;
+        for(int i = 0; i < livros.length; i++) {
+            total += diasAtrasados[i] * multa[i];
+        }
+        return total;
+    }
+    
+    public double diasAtrasados() {
+        int dias = 0;
+        int qtdiasAtrasados = 0;
+        
+        for(int i = 0; i < diasAtrasados.length; i++) {
+            dias += diasAtrasados[i];
+            qtdiasAtrasados++;
+        }
+        if(qtdiasAtrasados == 0) {
+            System.out.println("Sem dias com atrasos");
+            return 0;
+        }
+        return (double) dias / qtdiasAtrasados;
+    }
+    
+    public void emprestarLivro(String titulo) {
+        for(int i = 0; i < livrosDisponiveis.length; i++) {
+            if(titulo.equals(livrosDisponiveis[i])) {
+                livrosDisponiveis[i] = null;
+                System.out.println("Livro emprestado: " + titulo);
+                return;
+            }
+        }
+     }   
+    
+    public void devolverLivro(String titulo, int diasAtrasoInformado) {
+        boolean livroCadastrado = false;
+        for (String livro : livros) {
+            if (livro.equals(titulo)) {
+                livroCadastrado = true;
+                break;
+            }
+        }
+        
+        if (!livroCadastrado) {
+            System.out.println("Erro: livro não cadastrado na biblioteca.");
+            return;
+        }
+        
+        for (int i = 0; i < livrosDisponiveis.length; i++) {
+            if (titulo.equals(livrosDisponiveis[i])) {
+                System.out.println("Livro já está disponível.");
+                return;
+            }
+        }
+        
+        for (int i = 0; i < livrosDisponiveis.length; i++) {
+            if (livrosDisponiveis[i] == null) {
+             livrosDisponiveis[i] = titulo;
+                diasAtrasados[i] = diasAtrasoInformado;
+                
+            int indiceLivro = -1;
+           for (int j = 0; j < livros.length; j++) {
+            if (livros[j].equals(titulo)) {
+            indiceLivro = j;
+                break;
+                    }
+                }
+                
+                double multaCalculada = diasAtrasoInformado * multa[indiceLivro];
+                System.out.println("Livro devolvido: " + titulo);
+                System.out.println("Dias de atraso atualizados para: " + diasAtrasoInformado);
+                if (diasAtrasoInformado > 0) {
+                    System.out.printf("Multa a pagar: R$ %.2f\n", multaCalculada);
+                } else {
+                    System.out.println("Sem multa, devolvido no prazo.");
+                }
+                
+                return;
+            }
+        }
+    }
+      
+} 

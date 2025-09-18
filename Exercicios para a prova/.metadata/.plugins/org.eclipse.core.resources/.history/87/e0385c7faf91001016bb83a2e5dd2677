@@ -1,0 +1,70 @@
+package Exercicios_POO;
+import Exercicios_POO.Loja;
+
+import java.util.Scanner;
+
+public class Main_Loja {
+
+    public static void main(String[] args) {
+        Loja lojaDSM = new Loja();
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("\n--- LOJA ---");
+        lojaDSM.getProdutos();
+
+        boolean sair = false;
+
+        while (!sair) {
+            System.out.println("\nEscolha uma opção:");
+            System.out.println("1 - Comprar produto");
+            System.out.println("2 - Repor produto");
+            System.out.println("3 - Mostrar produtos em destaque");
+            System.out.println("4 - Mostrar valor total do estoque");
+            System.out.println("0 - Sair");
+            System.out.print("Opção: ");
+            int opcao = sc.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("Digite o código do produto para comprar (1 - " + lojaDSM.getQtd() + "): ");
+                    // Aqui pode listar os produtos para ajudar, ou só o intervalo
+                    int codCompra = sc.nextInt();
+                    System.out.print("Digite a quantidade para comprar: ");
+                    int qtdCompra = sc.nextInt();
+
+                    String resCompra = lojaDSM.comprarProduto(codCompra, qtdCompra);
+                    System.out.println(resCompra);
+                    break;
+
+                case 2: 
+                    System.out.print("Digite o código do produto para repor (1 - " + lojaDSM.getQtd() + "): ");
+                    int codRepor = sc.nextInt();
+                    System.out.print("Digite a quantidade para repor: ");
+                    int qtdRepor = sc.nextInt();
+
+                    String resRepor = lojaDSM.reporProduto(codRepor, qtdRepor);
+                    System.out.println(resRepor);
+                    break;
+
+                case 3:
+                    System.out.println(lojaDSM.produtosDestaque());
+                    break;
+
+                case 4:
+                    System.out.println("Valor total do estoque: R$ " + lojaDSM.vl_total_Estoque());
+                    break;
+
+                case 0:
+                    sair = true;
+                    System.out.println("Saindo da Loja");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+
+        sc.close();
+    }
+}

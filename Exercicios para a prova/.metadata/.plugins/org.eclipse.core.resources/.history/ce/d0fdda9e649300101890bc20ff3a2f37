@@ -1,0 +1,85 @@
+package Exercicios_POO;
+import java.util.Scanner;
+
+public class Inversa {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        int[][] I2 = {
+            {1, 0, 0},
+            {0, 1, 0},
+            {0, 0, 1}
+        };
+            
+        int matriz[][] = new int[3][3];
+        
+        // Inserindo valores dentro da Matriz
+        System.out.println("Digite um valor para a matriz: ");
+        for (int l = 0; l < 3; l++) {
+            for (int c = 0; c < 3; c++) {
+                System.out.println("Digite o valor para a posição [" + l + "] [" + c + "]: ");
+                matriz[l][c] = scan.nextInt();
+            }
+        }
+        
+        System.out.println();
+        
+        // Exibindo a matriz
+        for (int l = 0; l < 3; l++) {
+            System.out.println();
+            for (int c = 0; c < 3; c++) {
+                System.out.print(matriz[l][c] + " ");
+            }
+        }
+
+        int pivo1 = matriz[0][0];
+        int nrNegativo1 = matriz[1][0] * -1;
+        int nrNegativo2 = matriz[2][0] * -1;
+        
+        // Cálculo da Segunda Linha
+        int L2_C1 = nrNegativo1 * matriz[0][0] + pivo1 * matriz[1][0];
+        int L2_C2 = nrNegativo1 * matriz[0][1] + pivo1 * matriz[1][1];
+        int L2_C3 = nrNegativo1 * matriz[0][2] + pivo1 * matriz[1][2];
+        
+        int L2_C4 = nrNegativo1 * I2[0][0] + pivo1 * I2[1][0];
+        int L2_C5 = nrNegativo1 * I2[0][1] + pivo1 * I2[1][1];
+        int L2_C6 = nrNegativo1 * I2[0][2] + pivo1 * I2[1][2];
+        
+        // Cálculo da Terceira Linha
+        int L3_C1 = nrNegativo2 * matriz[0][0] + pivo1 * matriz[2][0];
+        int L3_C2 = nrNegativo2 * matriz[0][1] + pivo1 * matriz[2][1];
+        int L3_C3 = nrNegativo2 * matriz[0][2] + pivo1 * matriz[2][2];
+        
+        int L3_C4 = nrNegativo2 * I2[0][0] + pivo1 * I2[2][0];
+        int L3_C5 = nrNegativo2 * I2[0][1] + pivo1 * I2[2][1];
+        int L3_C6 = nrNegativo2 * I2[0][2] + pivo1 * I2[2][2];
+        
+        System.out.println(L2_C3);
+        
+        System.out.println();
+        
+        // Nova Matriz 2x6
+        System.out.println("Nova Matriz 2x6:");
+        int[][] novaMatriz = new int[2][6];  // Alterado para 2x6
+
+        // Primeira linha da novaMatriz é igual à matriz original
+        for (int c = 0; c < 3; c++) {
+            novaMatriz[0][c] = matriz[0][c];  // Linha 1 da nova matriz = linha 1 da matriz original
+            novaMatriz[1][c] = matriz[1][c];  // Linha 2 da nova matriz = linha 2 da matriz original
+        }
+        
+        // Segunda linha da novaMatriz (calculada)
+        novaMatriz[1][3] = L2_C1;
+        novaMatriz[1][4] = L2_C2;
+        novaMatriz[1][5] = L2_C3;
+        
+        // Exibindo a nova matriz
+        for (int l = 0; l < 2; l++) {  // Percorrendo as 2 linhas da novaMatriz
+            System.out.println();
+            for (int c = 0; c < 6; c++) {
+                System.out.print(novaMatriz[l][c] + " ");
+            }
+        }
+    }
+}
