@@ -1,29 +1,54 @@
+package main;
+
+import client.api;
+import conexao.ConexaoPostgres;
+import dao.EmpresaDao;
+import dao.SocioDao;
+import model.Empresa;
+import model.Socio;
+
+import java.sql.Connection;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o CNPJ: ");
+        String cnpj = scan.nextLine().replaceAll("\\D", "");
+
         try {
 
-            Scanner scanner = new Scanner(System.in);
+            // consulta API
+            Empresa empresa = api.consultarCnpj(cnpj);
 
-            System.out.print("Digite o CNPJ: ");
-            String cnpj = scanner.nextLine();
+            if (empresa == null) {
+                System.out.println("Empresa não encontrada.");
+                return;
+            }
 
-            cnpj = cnpj.replaceAll("[^0-9]", "");
+            // conexão com banco
+            try (Connection conn = ConexaoPostgres.getConnection()) {
 
-            BrasilApiClient api = new BrasilApiClient();
+                EmpresaDao empresaDao = new EmpresaDao(conn);
+                empresaDao.salvarEmpresa(empresa);
 
-            Empresa empresa = api.buscarEmpresa(cnpj);
+                SocioDao socioDao = new SocioDao(conn);
 
-            EmpresaDAO empresaDAO = new EmpresaDAO();
-            empresaDAO.salvar(empresa);
+                List<Socio> socios = empresa.getQsa();
 
-            SocioDAO socioDAO = new SocioDAO();
-            socioDAO.salvarSocios(empresa.getCnpj(), empresa.getQsa());
+                if (socios != null) {
+                    for (Socio socio : socios) {
+                        socioDao.salvarSocio(socio, empresa.getCnpj());
+                    }
+                }
 
-            System.out.println("Empresa salva com sucesso!");
+                System.out.println("Empresa e sócios salvos no banco!");
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

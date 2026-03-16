@@ -1,15 +1,24 @@
+package conexao;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConexaoPostgres {
-    public static void main(String[] args) {
-        String url = "jdbc:postgresql://localhost:5432/bd_api";
-        String user = "eduardosilvaaa072"; // usuário que você usa no PgAdmin
-        String password = "Dudu_2006";
 
-        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+    private static final String URL = "jdbc:postgresql://localhost:5432/bd_api";
+    private static final String USER = "eduardosilvaaa072";
+    private static final String PASSWORD = "Dudu_2006";
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+
+    public static void main(String[] args) {
+        try (Connection conn = getConnection()) {
             System.out.println("Conexão bem-sucedida!");
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.err.println("Erro na conexão:");
             e.printStackTrace();
         }
     }

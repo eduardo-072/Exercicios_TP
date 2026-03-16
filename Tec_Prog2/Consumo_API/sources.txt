@@ -1,0 +1,7 @@
+src/model/Empresa.java
+src/model/Socio.java
+src/dao/SocioDao.java
+src/dao/EmpresaDao.java
+src/conexao/ConexaoPostgres.java
+src/client/api.java
+src/main/Main.java

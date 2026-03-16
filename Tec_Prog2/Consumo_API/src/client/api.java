@@ -1,29 +1,37 @@
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+package client;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import com.google.gson.Gson;
+import model.Empresa;
 
-public class api{
-    public Empresa buscarEmpresa(string cnpj) throws Exception{
-        String url = "https://brasilapi.com.br/api/cnpj/v1" + cnpj;
+public class api {
 
-        HttpRequest cliente = HttpCliente.newHttpCliente();
-        HttpRequest request = HttpRequest.newBuilder();
-            .uri(URI.create(url))
-                .GET()
-                .build();
+    // client/api.java
+    public Empresa consultarCnpj(String cnpj) {
+        Empresa empresa = null;
+        String url = "https://brasilapi.com.br/api/cnpj/v1/" + cnpj;
 
-         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        try {
+            HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Accept", "application/json");
 
-         String json = response.body();
+            int status = con.getResponseCode();
+            if (status == 200) {
+                String json = lerResposta(con); // método que retorna String da API
+                empresa = gson.fromJson(json, Empresa.class);
+            } else {
+                System.out.println("CNPJ não encontrado ou inválido: " + status);
+            }
+        } catch (IOException e) {
+            System.out.println("Erro de conexão com a API: " + e.getMessage());
+        }
 
-         Gson gson = new Gson();
-
-         Empresa empresa = gson.fromJson(json, Empresa.class);
-
-         return empresa;
-
+        return empresa;
+    }
     }
 }
