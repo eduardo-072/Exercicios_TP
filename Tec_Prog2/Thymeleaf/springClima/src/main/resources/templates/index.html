@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resultado</title>
+</head>
+<body>
+
+<h1>Clima Atual</h1>
+
+<p><strong>Temperatura:</strong>
+    <span th:text="${dados.climaAtual.temperatura}"></span> °C
+</p>
+
+<p><strong>Vento:</strong>
+    <span th:text="${dados.climaAtual.velocidadeVento}"></span> km/h
+</p>
+
+<p><strong>Condição:</strong>
+    <span th:text="${descricao}"></span>
+</p>
+
+<br>
+<a href="/">Voltar</a>
+
+</body>
+</html>

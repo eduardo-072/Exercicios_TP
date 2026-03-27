@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Clima</title>
+</head>
+<body>
+
+<h1>Buscar Clima</h1>
+
+<form action="/buscar" method="post">
+    <input type="text" name="latitude" placeholder="Latitude (-23.55)" required>
+    <input type="text" name="longitude" placeholder="Longitude (-46.63)" required>
+    <button type="submit">Buscar</button>
+</form>
+
+<p th:if="${erro}" th:text="${erro}"></p>
+
+</body>
+</html>
