@@ -1,26 +1,66 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
-    <title>Resultado</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado </title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
-<body>
-
-<h1>Clima Atual</h1>
-
-<p><strong>Temperatura:</strong>
-    <span th:text="${dados.climaAtual.temperatura}"></span> °C
-</p>
-
-<p><strong>Vento:</strong>
-    <span th:text="${dados.climaAtual.velocidadeVento}"></span> km/h
-</p>
-
-<p><strong>Condição:</strong>
-    <span th:text="${descricao}"></span>
-</p>
-
-<br>
-<a href="/">Voltar</a>
-
+<body class="page-result">
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+<main class="container">
+    <header class="site-header">
+        <div class="logo">
+            <span class="logo-icon">◈</span>
+            <span class="logo-text">ClimaScan</span>
+        </div>
+    </header>
+    <section class="result-hero">
+        <p class="hero-label">Condições Atuais</p>
+        <h1 class="result-temp">
+            <span th:text="${dados.climaAtual.temperatura}">--</span>
+            <span class="temp-unit">°C</span>
+        </h1>
+        <p class="result-condition" th:text="${descricao}">Carregando...</p>
+    </section>
+    <div class="result-grid">
+        <div class="card stat-card">
+            <div class="stat-icon">💨</div>
+            <div class="stat-body">
+                <p class="stat-label">Velocidade do Vento</p>
+                <p class="stat-value">
+                    <span th:text="${dados.climaAtual.velocidadeVento}">--</span>
+                    <span class="stat-unit">km/h</span>
+                </p>
+            </div>
+        </div>
+        <div class="card stat-card">
+            <div class="stat-icon">🌡</div>
+            <div class="stat-body">
+                <p class="stat-label">Temperatura</p>
+                <p class="stat-value">
+                    <span th:text="${dados.climaAtual.temperatura}">--</span>
+                    <span class="stat-unit">°C</span>
+                </p>
+            </div>
+        </div>
+        <div class="card stat-card stat-card--wide">
+            <div class="stat-icon">🔍</div>
+            <div class="stat-body">
+                <p class="stat-label">Condição Geral</p>
+                <p class="stat-value stat-value--text" th:text="${descricao}">--</p>
+            </div>
+        </div>
+    </div>
+    <div class="result-actions">
+        <a href="/" class="btn-primary">
+            <span class="btn-text">Nova Busca</span>
+            <span class="btn-icon">→</span>
+        </a>
+    </div>
+</main>
 </body>
 </html>

@@ -2,23 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Resultado</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-<h1>Informações do País</h1>
+<div class="container">
+    <h1>📊 Informações do País</h1>
 
-<p><strong>Nome:</strong> <span th:text="${pais.nomeComum}"></span></p>
-<p><strong>Nome Oficial:</strong> <span th:text="${pais.nomeOficial}"></span></p>
-<p><strong>Capital:</strong> <span th:text="${pais.capital}"></span></p>
-<p><strong>Região:</strong> <span th:text="${pais.regiao}"></span></p>
-<p><strong>Sub-Região:</strong> <span th:text="${pais.subRegiao}"></span></p>
-<p><strong>População:</strong> <span th:text="${pais.populacao}"></span></p>
-<p><strong>Área:</strong> <span th:text="${pais.area}"></span></p>
+    <div class="info">
+        <p><strong>Nome:</strong> <span th:text="${pais.nomeComum}"></span></p>
+        <p><strong>Nome Oficial:</strong> <span th:text="${pais.nomeOficial}"></span></p>
+        <p><strong>Capital:</strong> <span th:text="${pais.capital}"></span></p>
+        <p><strong>Região:</strong> <span th:text="${pais.regiao}"></span></p>
+        <p><strong>Sub-Região:</strong> <span th:text="${pais.subRegiao}"></span></p>
+        <p><strong>População:</strong> <span th:text="${pais.populacao}"></span></p>
+        <p><strong>Área:</strong> <span th:text="${pais.area}"></span></p>
+    </div>
 
-<img th:src="${pais.bandeira}" alt="Bandeira" width="200"/>
+    <img th:src="${pais.bandeira}" alt="Bandeira" width="200"/>
 
-<br><br>
-<a href="/">Voltar</a>
+    <br>
+    <a href="/">⬅ Voltar</a>
+</div>
 
 </body>
 </html>

@@ -1,19 +1,76 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
-    <title>Clima</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
-<body>
-
-<h1>Buscar Clima</h1>
-
-<form action="/buscar" method="post">
-    <input type="text" name="latitude" placeholder="Latitude (-23.55)" required>
-    <input type="text" name="longitude" placeholder="Longitude (-46.63)" required>
-    <button type="submit">Buscar</button>
-</form>
-
-<p th:if="${erro}" th:text="${erro}"></p>
-
+<body class="page-search">
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+<main class="container">
+    <header class="site-header">
+        <div class="logo">
+            <span class="logo-icon">◈</span>
+            <span class="logo-text">Busque o clima</span>
+        </div>
+    </header>
+    <section class="hero">
+        <p class="hero-label">Consulta Meteorológica</p>
+        <h1 class="hero-title">Descubra o clima<br><em>em qualquer lugar</em></h1>
+        <p class="hero-sub">Insira as coordenadas geográficas para obter condições climáticas em tempo real.</p>
+    </section>
+    <div class="card form-card">
+        <form action="/buscar" method="post" class="search-form">
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="latitude">Latitude</label>
+                    <input
+                            type="text"
+                            id="latitude"
+                            name="latitude"
+                            placeholder="-23.5505"
+                            title="Ex: -23.5505"
+                            required>
+                    <span class="input-hint">Norte (+) / Sul (−)</span>
+                </div>
+                <div class="input-divider">×</div>
+                <div class="input-group">
+                    <label for="longitude">Longitude</label>
+                    <input
+                            type="text"
+                            id="longitude"
+                            name="longitude"
+                            placeholder="-46.6333"
+                            title="Ex: -46.6333"
+                            required>
+                    <span class="input-hint">Leste (+) / Oeste (−)</span>
+                </div>
+            </div>
+            <div th:if="${erro}" class="alert-error">
+                <span class="alert-icon">⚠</span>
+                <span th:text="${erro}"></span>
+            </div>
+            <button type="submit" class="btn-primary">
+                <span class="btn-text">Buscar Clima</span>
+                <span class="btn-icon">→</span>
+            </button>
+        </form>
+    </div>
+    <div class="coords-hint">
+        <span>Exemplos rápidos:</span>
+        <button class="coord-chip" onclick="fillCoords('-23.5505', '-46.6333')">São Paulo</button>
+        <button class="coord-chip" onclick="fillCoords('-22.9068', '-43.1729')">Rio de Janeiro</button>
+        <button class="coord-chip" onclick="fillCoords('-15.7801', '-47.9292')">Brasília</button>
+    </div>
+</main>
+<script>
+    function fillCoords(lat, lon) {
+        document.getElementById('latitude').value = lat;
+        document.getElementById('longitude').value = lon;
+    }
+</script>
 </body>
 </html>

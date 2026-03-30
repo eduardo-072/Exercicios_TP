@@ -2,15 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Buscar País</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-<h1>Buscar País</h1>
+<div class="container">
+    <h1>🌍 Buscar País</h1>
 
-<form action="/buscar" method="post">
-    <input type="text" name="nome" placeholder="Digite o país em inglês" required>
-    <button type="submit">Buscar</button>
-</form>
+    <form action="/buscar" method="post">
+        <input type="text" name="nome" placeholder="Digite o país em inglês" required>
+        <br>
+        <button type="submit">Buscar</button>
+    </form>
+</div>
 
 </body>
 </html>
